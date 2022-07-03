@@ -7,7 +7,7 @@ const {check, validationResult} = require("express-validator");
 const router = new Router();
 
 
-router.post("/registration",
+router.post("/sign-up",
     [
         check("email", "Incorrect email").isEmail(),
         check("password", "Password must be longer than 3 and shorter than 12").isLength({min: 3, max: 12})
@@ -39,7 +39,7 @@ router.post("/registration",
         }
     });
 
-router.post("/login",
+router.post("/sign-in",
     async (request, response) => {
         try {
             const {email, password} = request.body;

@@ -1,0 +1,61 @@
+.navbar {
+    background: #ffa502;
+    width: 100vw;
+    height: 10vh;
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 1.3rem;
+}
+
+.logo-container {
+    width: 5%;
+    display: flex;
+    padding-left: 4rem;
+    justify-content: start;
+    align-items: center;
+}
+
+.logo-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-logo {
+    padding-bottom: 0.1rem;
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(79deg) brightness(103%) contrast(96%);
+    width: 4rem;
+    height: 4rem;
+}
+
+.navbar-header {
+    width: 75%;
+    text-align: start;
+}
+
+.navbar-header a {
+    text-decoration: none;
+    padding-left: 1rem;
+    font-size: 2rem;
+    color: unset;
+}
+
+.navbar-header a:hover {
+    text-decoration: none;
+    color: unset;
+}
+
+.auth-container {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 4rem;
+}
+
+.auth-container div {
+    padding-left: 1rem;
+}
