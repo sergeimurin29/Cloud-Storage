@@ -1,3 +1,4 @@
+import "./animations.css";
 import './App.css';
 import NavRoutes from "./routes/NavRoutes";
 

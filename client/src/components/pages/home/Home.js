@@ -1,9 +1,10 @@
 import React from 'react';
+import homeImage from "../../../assets/home-image.jpeg";
 
 const Home = () => {
     return (
         <div className={"home-page"}>
-            home
+            <img src={homeImage} alt={"Cloud Storage home page"}/>
         </div>
     );
 };

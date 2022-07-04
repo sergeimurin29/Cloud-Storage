@@ -1,12 +1,12 @@
 import React from 'react';
 import "./Navbar.css";
+import "../../../App.css";
 import {Link} from "react-router-dom";
-import {userReducer} from "../../reducers/userReducer";
-import Logo from "../../assets/navbar-logo.svg";
+import Logo from "../../../assets/navbar-logo.svg";
 
 const Navbar = () => {
     return (
-        <div className={"navbar"}>
+        <div className={"navbar shadow"}>
             <div className={"logo-container"}>
                 <Link to={"/"} replace={true}>
                     <img src={Logo} alt={"Cloud Storage Logo"} className={"navbar-logo"}/>

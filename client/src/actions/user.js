@@ -7,7 +7,7 @@ export const SignUpAction = async (email, password) => {
             email,
             password,
         });
-        alert(response.data.message);
+        console.log(response);
     } catch (error) {
         console.log(error);
     }
