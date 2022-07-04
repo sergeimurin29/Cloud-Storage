@@ -35,6 +35,7 @@
 }
 
 .navbar-logo {
+    pointer-events: none;
     padding-bottom: 0.1rem;
     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(79deg) brightness(103%) contrast(96%);
     width: 3rem;

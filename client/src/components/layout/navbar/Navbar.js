@@ -28,7 +28,7 @@ const Navbar = () => {
                 }
                 {isAuth &&
                     <>
-                        <div className={"navbar-signup"}><a onClick={()=>dispatch(signoutUser())}>Sign out</a></div>
+                        <div className={"navbar-signup"}><a  onClick={()=>dispatch(signoutUser())}>Sign out</a></div>
                     </>
                 }
             </div>

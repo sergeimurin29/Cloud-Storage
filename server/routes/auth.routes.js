@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const authMiddleware = require("../middleware/auth.middleware");
+const File = require("../models/File");
+const fileService = require("../services/fileService");
 const {check, validationResult} = require("express-validator");
 const router = new Router();
 
@@ -31,6 +33,7 @@ router.post("/sign-up",
             const user = new User({email, password: hashPassword});
 
             await user.save();
+            await fileService.createDir(new File({user: user._id, name: ""}));
             return response.json({message: "User was created"});
 
         } catch (e) {
@@ -77,7 +80,7 @@ router.post("/sign-in",
 router.get("/auth", authMiddleware,
     async (request, response) => {
         try {
-            const user = await User.findOne({_id:request.user.id});
+            const user = await User.findOne({_id: request.user.id});
             const token = jwt.sign({id: user["id"]}, config.get("secretKey"), {expiresIn: "1h"});
 
             return response.json({
