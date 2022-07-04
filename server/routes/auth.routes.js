@@ -10,7 +10,7 @@ const router = new Router();
 router.post("/sign-up",
     [
         check("email", "Incorrect email").isEmail(),
-        check("password", "Password must be longer than 3 and shorter than 12").isLength({min: 3, max: 12})
+        check("password", "Password must be longer than 3 and shorter than 16").isLength({min: 3, max: 16})
 
     ],
     async (request, response) => {
@@ -20,7 +20,7 @@ router.post("/sign-up",
                 return response.status(400).json({message: "Incorrect request", errors});
             }
 
-            const {email, password} = request.body;
+            const {email, password} = request.headers;
 
             const candidate = await User.findOne({email});
 
@@ -42,8 +42,7 @@ router.post("/sign-up",
 router.post("/sign-in",
     async (request, response) => {
         try {
-            const {email, password} = request.body;
-
+            const {email, password} = request.headers;
             const user = await User.findOne({email});
             if (!user) {
                 return response.status(404).json({message: `User with email ${email} not found`});

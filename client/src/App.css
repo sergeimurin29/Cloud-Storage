@@ -95,12 +95,13 @@ body {
 }
 
 .input-error-container {
+    width: 20em;
     padding-top: 0.4rem;
     min-height: 2rem;
     height: 2rem;
     display: flex;
     align-items: start;
-    justify-content: center;
+    justify-content: start;
 }
 
 input.input-error {

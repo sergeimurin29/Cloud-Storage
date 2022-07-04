@@ -9,18 +9,13 @@ import crossIcon from "../../assets/close-window-icon.svg";
 
 const SignUp = () => {
 
-    const {
-        formState: {errors, isValid},
-        handleSubmit,
-        getValues,
-        register,
-    } = useForm({
-            mode: 'all'
-        }
-    );
+    const {formState: {errors, isValid}, handleSubmit, reset, getValues, register} = useForm({
+        mode: 'all'
+    });
 
     const onSubmit = (formData) => {
         SignUpAction(formData?.email, formData?.password).then();
+        reset();
     }
 
     const handleInputError = (nodeId) => {
@@ -78,12 +73,12 @@ const SignUp = () => {
                                    message: "This field cannot be empty"
                                },
                                minLength: {
-                                   value: 3,
+                                   value: 4,
                                    message: "Password must be longer than 3"
                                },
                                maxLength: {
-                                   value: 12,
-                                   message: "Password must be shorter than 12",
+                                   value: 16,
+                                   message: "Password must be shorter than 16",
                                },
                            })}
                     />
@@ -104,12 +99,12 @@ const SignUp = () => {
                                    message: "This field cannot be empty",
                                },
                                minLength: {
-                                   value: 3,
+                                   value: 4,
                                    message: "Password must be longer than 3"
                                },
                                maxLength: {
-                                   value: 12,
-                                   message: "Password must be shorter than 12",
+                                   value: 16,
+                                   message: "Password must be shorter than 16",
                                },
                                validate: {
                                    isMatch: (value) => {
