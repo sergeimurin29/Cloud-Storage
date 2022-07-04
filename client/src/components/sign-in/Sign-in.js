@@ -1,21 +1,24 @@
 import React from 'react';
 import "./Sign-in.css";
 import {useForm} from "react-hook-form";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import {SignInAction} from "../../actions/user";
 import homeImage from "../../assets/home-image.jpeg";
 
 import crossIcon from "../../assets/close-window-icon.svg";
+import {setUser} from "../../reducers/userReducer";
 
 const SignIn = () => {
+
+    const dispatch = useDispatch();
 
     const {formState: {errors, isValid}, handleSubmit, reset, register} = useForm({
         mode: 'all'
     });
 
     const onSubmit = (formData) => {
-        SignInAction(formData?.email, formData?.password).then();
-        reset();
+        dispatch(SignInAction(formData.email, formData.password));
     }
 
     const handleInputError = (nodeId) => {
@@ -91,7 +94,7 @@ const SignIn = () => {
                         }
                     </div>
 
-                    <button type="submit" className={"btn shadow"} disabled={!isValid}>Sign Up</button>
+                    <button type="submit" className={"btn shadow"} disabled={!isValid}>Sign In</button>
                 </form>
             </div>
         </div>

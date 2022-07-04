@@ -1,8 +1,8 @@
 import axios from "axios";
 import {clientConfig} from "../config/default";
+import {setUser} from "../reducers/userReducer";
 
 export const SignUpAction = async (email, password) => {
-    debugger;
     try {
         const response = await axios.post(clientConfig.server + clientConfig.post.auth["sign-up"], {}, {
             headers: {
@@ -10,6 +10,7 @@ export const SignUpAction = async (email, password) => {
                 password,
             }
         });
+
         console.log(response);
         return response;
     } catch (error) {
@@ -18,18 +19,37 @@ export const SignUpAction = async (email, password) => {
 }
 
 
-export const SignInAction = async (email, password) => {
-    debugger;
-    try {
-        const response = await axios.post(clientConfig.server + clientConfig.post.auth["sign-in"], {}, {
-            headers: {
-                email,
-                password
-            }
-        });
-        console.log(response);
-        return response;
-    } catch (error) {
-        console.log(error);
+export const SignInAction = (email, password) => {
+    return async dispatch => {
+        try {
+            const response = await axios.post(clientConfig.server + clientConfig.post.auth["sign-in"], {}, {
+                headers: {
+                    email,
+                    password
+                }
+            });
+            dispatch(setUser(response.data.user));
+            localStorage.setItem("token", response.data.token);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const AuthAction = () => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(clientConfig.server + clientConfig.get.auth.auth,  {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            dispatch(setUser(response.data.user));
+            localStorage.setItem("token", response.data.token);
+        } catch (error) {
+            console.log(error);
+            console.log(error.response.data.message);
+            localStorage.removeItem("token");
+        }
     }
 }
