@@ -5,9 +5,8 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import {SignInAction} from "../../actions/user";
 import homeImage from "../../assets/home-image.jpeg";
-
 import crossIcon from "../../assets/close-window-icon.svg";
-import {setUser} from "../../reducers/userReducer";
+
 
 const SignIn = () => {
 
@@ -56,7 +55,7 @@ const SignIn = () => {
                                    message: "This field cannot be empty",
                                },
                                pattern: {
-                                   value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                   value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/,
                                    message: "Invalid email"
                                }
                            })}
@@ -76,8 +75,8 @@ const SignIn = () => {
                                    message: "This field cannot be empty"
                                },
                                minLength: {
-                                   value: 4,
-                                   message: "Password must be longer than 3"
+                                   value: 6,
+                                   message: "Password must be longer than 5"
                                },
                                maxLength: {
                                    value: 16,

@@ -1,10 +1,12 @@
 const Router = require("express");
-const router = new Router();
 const authMiddleware = require("../middleware/auth.middleware");
-const fileController = require("../controllers/fileController");
+const FileController = require("../controllers/FileController");
 
-router.post("", authMiddleware, fileController.createDir);
-router.get("", authMiddleware, fileController.getFiles);
+const router = new Router();
+
+
+router.post("", authMiddleware, FileController.createDir);
+router.get("", authMiddleware, FileController.getFiles);
 
 
 module.exports = router;

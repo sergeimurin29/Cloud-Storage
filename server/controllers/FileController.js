@@ -24,7 +24,6 @@ class FileController {
             return response.status(400).json(error);
         }
     }
-
     async getFiles(request, response) {
         try {
             const files = await File.find({user: request.user.id, parent: request.query.parent});

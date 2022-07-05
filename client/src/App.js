@@ -9,8 +9,10 @@ import NavRoutes from "./routes/NavRoutes";
 function App() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(AuthAction());
-    },[]);
+        if (localStorage.getItem("token")) {
+            dispatch(AuthAction());
+        }
+    }, []);
     return (
         <div className="App">
             <NavRoutes/>

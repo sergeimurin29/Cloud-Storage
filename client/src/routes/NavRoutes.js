@@ -4,6 +4,7 @@ import {Route, Routes} from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Home from "../components/pages/home/Home";
 import NotFound from "../components/pages/not-found/NotFound";
+import SignUpSuccess from "../components/pages/sign-up-success/sign-up-success";
 import Redirect from "../components/redirect/redirect";
 import SignIn from "../components/sign-in/Sign-in";
 import SignUp from "../components/sign-up/Sign-up";
@@ -17,6 +18,7 @@ const NavRoutes = () => {
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Home/>}/>
                     <Route path={"*"} element={<NotFound/>}/>
+                    <Route path={"sign-up-success"} element={<SignUpSuccess/>}/>
                     {!isAuth &&
                         <>
                             <Route path={"sign-in"} element={<SignIn/>}/>
@@ -25,10 +27,9 @@ const NavRoutes = () => {
                     }
                     {isAuth &&
                         <>
-                            <Route path={"sign-in"} element={<Redirect to={"../"}/>}/>
-                            <Route path={"sign-up"} element={<Redirect to={"../"}/>}/>
+                            <Route path={"sign-in"} element={<Redirect to={"../"} replace={true}/>}/>
+                            <Route path={"sign-up"} element={<Redirect to={"../"} replace={true}/>}/>
                         </>
-
                     }
                 </Route>
             </Routes>

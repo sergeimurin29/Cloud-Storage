@@ -10,8 +10,6 @@ export const SignUpAction = async (email, password) => {
                 password,
             }
         });
-
-        console.log(response);
         return response;
     } catch (error) {
         console.log(error);

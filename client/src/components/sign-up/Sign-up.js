@@ -1,21 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Sign-up.css";
 import {useForm} from "react-hook-form";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {SignUpAction} from "../../actions/user";
+import {SignInAction, SignUpAction} from "../../actions/user";
 import homeImage from "../../assets/home-image.jpeg";
-
 import crossIcon from "../../assets/close-window-icon.svg";
+import Redirect from "../redirect/redirect";
 
 const SignUp = () => {
+    const [redirect, setRedirect] = useState(false);
+    const dispatch = useDispatch();
 
     const {formState: {errors, isValid}, handleSubmit, reset, getValues, register} = useForm({
         mode: 'all'
     });
 
     const onSubmit = (formData) => {
-        SignUpAction(formData?.email, formData?.password).then();
-        reset();
+        SignUpAction(formData?.email, formData?.password)
+            .then(response => {
+                if (response) {
+                    reset();
+                    setRedirect(true);
+                    dispatch(SignInAction(formData?.email, formData?.password));
+                }
+            });
     }
 
     const handleInputError = (nodeId) => {
@@ -53,7 +62,7 @@ const SignUp = () => {
                                    message: "This field cannot be empty",
                                },
                                pattern: {
-                                   value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                   value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/,
                                    message: "Invalid email"
                                }
                            })}
@@ -73,8 +82,8 @@ const SignUp = () => {
                                    message: "This field cannot be empty"
                                },
                                minLength: {
-                                   value: 4,
-                                   message: "Password must be longer than 3"
+                                   value: 6,
+                                   message: "Password must be longer than 5"
                                },
                                maxLength: {
                                    value: 16,
@@ -99,8 +108,8 @@ const SignUp = () => {
                                    message: "This field cannot be empty",
                                },
                                minLength: {
-                                   value: 4,
-                                   message: "Password must be longer than 3"
+                                   value: 6,
+                                   message: "Password must be longer than 5"
                                },
                                maxLength: {
                                    value: 16,
@@ -123,6 +132,9 @@ const SignUp = () => {
                     </div>
 
                     <button type="submit" className={"btn shadow"} disabled={!isValid}>Sign Up</button>
+                    {redirect &&
+                        <Redirect to={"../sign-up-success"} replace={true}/>
+                    }
                 </form>
             </div>
         </div>
