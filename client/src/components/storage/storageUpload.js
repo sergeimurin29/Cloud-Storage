@@ -13,7 +13,7 @@ const StorageUpload = () => {
     });
     const onSubmit = (formData) => {
         const files = [...formData?.fileInput];
-        files.forEach((file) => dispatch(uploadFile(file, currentDirectory)))
+        files.forEach((file) => dispatch(uploadFile(file, currentDirectory)));
     }
     return (
         <div className="storage-upload">

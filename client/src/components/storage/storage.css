@@ -31,3 +31,43 @@
     height: 20vh;
     background: var(--color-background-container);
 }
+
+.drag-hover {
+    width: 100vw;
+    min-height: calc(100vh - 8vh);
+    position: absolute;
+    z-index: 5;
+    background-color: var(--color-background-container);
+    opacity: 0.8;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.drag-hover img {
+    width: 24rem;
+    height: 24rem;
+    opacity: 1 !important;
+    filter: var(--color-icons-filter2);
+}
+
+.drag-hover div {
+    margin-top: 3rem;
+    font-size: 3.5rem;
+    opacity: 1;
+    color: var(--color-background-navbar)
+}
+
+.drag-hover div p {
+    margin-top: 0;
+    font-size: 2rem;
+    opacity: 1;
+    color: var(--color-link-main-hover);
+}
+
+

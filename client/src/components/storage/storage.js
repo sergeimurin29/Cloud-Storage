@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getFiles} from "../../actions/file";
+import {getFiles, uploadFile} from "../../actions/file";
+import uploadFileDragIcon from "../../assets/upload-file-drag-icon.svg";
 import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay} from "../../reducers/fileReducer";
 import FileList from "./fileList/fileList";
 import "./storage.css";
@@ -11,6 +12,8 @@ const Storage = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
     const directoryStack = useSelector(state => state.files.directoryStack);
+
+    const [dragEnter, setDragEnter] = useState(false);
 
     useEffect(() => {
         dispatch(getFiles(currentDirectory));
@@ -27,17 +30,55 @@ const Storage = () => {
         dispatch(setCurrentDirectory(backDirectoryId));
     }
 
+    const handleDragEnter = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setDragEnter(true);
+    }
+
+    const handleDragLeave = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setDragEnter(false);
+    }
+
+    const handleDrop = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        let files = [...event.dataTransfer.files];
+        files.forEach((file) => dispatch(uploadFile(file, currentDirectory)));
+        setDragEnter(false);
+    }
+
 
     return (
-        <div className={"storage-page"}>
-            <div className={"storage-btn-container"}>
-                {currentDirectory && <button className={"btn"} onClick={handleBackClick}>Back</button>}
-                <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
+        <>
+            {dragEnter &&
+                <div className={"drag-hover"}
+                     onDragEnter={handleDragEnter}
+                     onDragLeave={handleDragLeave}
+                     onDragOver={handleDragEnter}
+                     onDrop={handleDrop}
+                >
+                    <img src={uploadFileDragIcon} alt={"Upload file"}/>
+                    <div>Drop your files here to upload
+                        to <p>Cloud Storage</p>
+                    </div>
+                </div>
+            }
+            <div className={"storage-page"}
+                 onDragEnter={handleDragEnter}
+                 onDragLeave={handleDragLeave}
+                 onDragOver={handleDragEnter}>
+                <div className={"storage-btn-container"}>
+                    {currentDirectory && <button className={"btn"} onClick={handleBackClick}>Back</button>}
+                    <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
+                </div>
+                <StorageUpload/>
+                <FileList/>
+                <PopUp/>
             </div>
-            <StorageUpload/>
-            <FileList/>
-            <PopUp/>
-        </div>
+        </>
     );
 };
 
