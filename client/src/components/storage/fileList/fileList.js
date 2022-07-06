@@ -1,7 +1,8 @@
 import React from 'react';
 import './fileList.css';
 import {useSelector} from "react-redux";
-import File from "./file/file";
+import File from "./File/file";
+
 
 
 
