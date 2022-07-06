@@ -33,7 +33,6 @@ class AuthController {
             response.send({message: "Server error"});
         }
     }
-
     async SignIn(request, response) {
         try {
             const {email, password} = request.headers;
@@ -67,7 +66,6 @@ class AuthController {
         }
 
     }
-
     async Auth(request, response) {
         try {
             const user = await User.findOne({_id: request.user.id});

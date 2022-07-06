@@ -4,11 +4,13 @@ export const clientConfig = {
         "auth": {
             "sign-up": "auth/sign-up",
             "sign-in": "auth/sign-in"
-        }
+        },
+        "files": "files",
     },
     "get": {
         "auth": {
             "auth": "auth/auth"
-        }
+        },
+        "files": "files"
     }
 }

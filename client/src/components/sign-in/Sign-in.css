@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.sign-in-header{
+.sign-in-header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,8 @@
     background: var(--color-background-container);
     border-radius: 28px;
 }
-.sign-in-container-header a{
+
+.sign-in-container-header a {
     margin-right: 1.5rem;
     margin-top: 1.5rem;
 }
@@ -36,12 +37,17 @@
     align-items: start;
 }
 
-.sign-in-form{
+.sign-in-form {
     width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: column;
+}
+
+.sign-in-btn {
+    height: 3rem;
+    width: 21rem;
 }
 
 .close-icon {

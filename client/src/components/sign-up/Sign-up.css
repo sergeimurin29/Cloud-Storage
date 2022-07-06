@@ -44,6 +44,11 @@
     flex-direction: column;
 }
 
+.sign-up-btn{
+    height: 3rem;
+    width: 21rem;
+}
+
 .close-icon {
     filter: var(--color-icons-filter);
     width: 1rem;

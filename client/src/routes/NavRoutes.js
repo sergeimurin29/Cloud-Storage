@@ -8,6 +8,7 @@ import SignUpSuccess from "../components/pages/sign-up-success/sign-up-success";
 import Redirect from "../components/redirect/redirect";
 import SignIn from "../components/sign-in/Sign-in";
 import SignUp from "../components/sign-up/Sign-up";
+import Storage from "../components/storage/storage";
 
 
 const NavRoutes = () => {
@@ -29,6 +30,7 @@ const NavRoutes = () => {
                         <>
                             <Route path={"sign-in"} element={<Redirect to={"../"} replace={true}/>}/>
                             <Route path={"sign-up"} element={<Redirect to={"../"} replace={true}/>}/>
+                            <Route path={"storage"} element={<Storage/>}/>
                         </>
                     }
                 </Route>

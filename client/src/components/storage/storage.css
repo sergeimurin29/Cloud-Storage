@@ -1,0 +1,11 @@
+.storage-page {
+    margin-top: 20px;
+}
+
+.storage-btn-container {
+    display: flex;
+}
+
+.storage-btn-container button {
+    margin-left: 10px;
+}

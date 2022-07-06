@@ -93,7 +93,7 @@ const SignIn = () => {
                         }
                     </div>
 
-                    <button type="submit" className={"btn shadow"} disabled={!isValid}>Sign In</button>
+                    <button type="submit" className={"btn shadow sign-in-btn"} disabled={!isValid}>Sign In</button>
                 </form>
             </div>
         </div>

@@ -1,0 +1,26 @@
+.file{
+    margin: 10px 0;
+    border-bottom: 2px solid var(--color-background-navbar);
+
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(4, 1fr);
+}
+.file-img{
+    justify-self: center;
+    width:3rem;
+    height: 3rem;
+}
+
+.file-name{
+    grid-column-start: 2;
+}
+
+.file-date{
+    grid-column-start: 5;
+    justify-self: center;
+}
+
+.file-size{
+    grid-column-start: 6;
+    justify-self: center;
+}
