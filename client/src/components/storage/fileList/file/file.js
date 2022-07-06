@@ -6,7 +6,7 @@ import fileIcon from "../../../../assets/file-icon.svg";
 const File = ({file}) => {
 
     return (
-        <div className={"file"}>
+        <div className={"file shadow"}>
             <img className={"file-img"} src={file.type === "dir" ? folderIcon : fileIcon} alt="file_img"/>
             <div className={"file-name"}>{file.name}</div>
             <div className={"file-date"}>{file.date.slice(0, 10)}</div>
