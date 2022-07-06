@@ -15,7 +15,7 @@ const File = ({file}) => {
         dispatch(setCurrentDirectory(file._id));
     }
     return (
-        <div className={"file shadow"} onClick={file.type === "dir" ? () => handleOpenDirectory() : ""}>
+        <div className={"file shadow scale-up-ver-top"} onClick={file.type === "dir" ? () => handleOpenDirectory() : ()=>{}}>
             <img className={"file-img"} src={file.type === "dir" ? folderIcon : fileIcon} alt="file_img"/>
             <div className={"file-name"}>{file.name}</div>
             <div className={"file-date"}>{file.date.slice(0, 10)}</div>

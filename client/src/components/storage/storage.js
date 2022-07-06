@@ -5,6 +5,7 @@ import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay} from "../../red
 import FileList from "./fileList/fileList";
 import "./storage.css";
 import PopUp from "./popUp";
+import StorageUpload from "./storageUpload";
 
 const Storage = () => {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Storage = () => {
                 {currentDirectory && <button className={"btn"} onClick={handleBackClick}>Back</button>}
                 <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
             </div>
+            <StorageUpload/>
             <FileList/>
             <PopUp/>
         </div>

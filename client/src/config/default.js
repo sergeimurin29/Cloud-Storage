@@ -5,7 +5,10 @@ export const clientConfig = {
             "sign-up": "auth/sign-up",
             "sign-in": "auth/sign-in"
         },
-        "files": "files",
+        "files": {
+            "files":"files",
+            "upload":"files/upload"
+        },
     },
     "get": {
         "auth": {

@@ -5,6 +5,21 @@ import {createFolder} from "../../actions/file";
 import crossIcon from "../../assets/close-window-icon.svg";
 import {setPopUpDisplay} from "../../reducers/fileReducer";
 
+
+export const handleInputError = (nodeId) => {
+    const node = document.getElementById(nodeId);
+    if (node) {
+        node.className = "input input-error";
+    }
+}
+
+export const handleInputValid = (nodeId) => {
+    const node = document.getElementById(nodeId);
+    if (node) {
+        node.className = "input";
+    }
+}
+
 const PopUp = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
@@ -18,19 +33,7 @@ const PopUp = () => {
         reset();
     };
 
-    const handleInputError = (nodeId) => {
-        const node = document.getElementById(nodeId);
-        if (node) {
-            node.className = "input input-error";
-        }
-    }
 
-    const handleInputValid = (nodeId) => {
-        const node = document.getElementById(nodeId);
-        if (node) {
-            node.className = "input";
-        }
-    }
 
 
     return (

@@ -9,6 +9,7 @@
 }
 .file-img{
     justify-self: center;
+    align-self: center;
     width:3rem;
     height: 3rem;
 }
