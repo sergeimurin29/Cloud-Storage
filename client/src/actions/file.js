@@ -5,7 +5,7 @@ import {addFile, setFiles} from "../reducers/fileReducer";
 export const getFiles = (directoryId) => {
     return async dispatch => {
         try {
-            const response = await axios.get(clientConfig.server + clientConfig.get.files, {
+            const response = await axios.get(clientConfig.server + clientConfig.get.files.files, {
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
                 params: directoryId ? {parent: directoryId} : {}
             });
@@ -62,5 +62,22 @@ export const uploadFile = (file, directoryId) => {
         } catch (error) {
             alert(error);
         }
+    }
+}
+
+export const downloadFile = async (file) => {
+    const response = await  fetch(`${clientConfig.server+clientConfig.get.files.download}?id=${file._id}`,{
+        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
+    })
+
+    if(response.status===200){
+        const fileBlob = await response.blob();
+        const downloadUrl = window.URL.createObjectURL(fileBlob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
     }
 }

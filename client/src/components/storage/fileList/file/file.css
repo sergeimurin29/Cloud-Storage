@@ -27,11 +27,24 @@
 }
 
 .file-date{
-    grid-column-start: 5;
+    grid-column-start: 4;
     justify-self: center;
 }
 
 .file-size{
-    grid-column-start: 6;
+    grid-column-start: 5;
     justify-self: center;
+}
+
+.file-buttons{
+    height: 100%;
+    grid-column-start: 6;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.file-buttons .delete-button, .file-buttons .download-button{
+    margin-right: 1.5rem;
 }

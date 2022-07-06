@@ -6,14 +6,17 @@ export const clientConfig = {
             "sign-in": "auth/sign-in"
         },
         "files": {
-            "files":"files",
-            "upload":"files/upload"
+            "files": "files",
+            "upload": "files/upload"
         },
     },
     "get": {
         "auth": {
             "auth": "auth/auth"
         },
-        "files": "files"
+        "files": {
+            "files": "files",
+            "download": "files/download"
+        }
     }
 }
