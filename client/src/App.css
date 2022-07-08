@@ -16,9 +16,11 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+
+    scroll-behavior: smooth;
 }
 
-img{
+img {
     pointer-events: none;
 }
 
@@ -32,8 +34,10 @@ img{
     --color-font-navbar: #ffffff;
     --color-icons: #57606f;
     --color-icons-filter: invert(53%) sepia(23%) saturate(249%) hue-rotate(179deg) brightness(86%) contrast(84%);
-    --color-icons-filter2:invert(86%) sepia(27%) saturate(4842%) hue-rotate(351deg) brightness(102%) contrast(107%);
-    --color-icons-filter3:invert(100%) sepia(0%) saturate(7499%) hue-rotate(332deg) brightness(104%) contrast(101%);
+    --color-icons-filter2: invert(86%) sepia(27%) saturate(4842%) hue-rotate(351deg) brightness(102%) contrast(107%);
+    --color-icons-filter3: invert(100%) sepia(0%) saturate(7499%) hue-rotate(332deg) brightness(104%) contrast(101%);
+    --color-icons-filter4: invert(73%) sepia(65%) saturate(3121%) hue-rotate(358deg) brightness(101%) contrast(101%);
+    --color-icons-filter5:  invert(75%) sepia(62%) saturate(2633%) hue-rotate(1deg) brightness(108%) contrast(107%) ;
 
     --color-input-border: #ced6e0;
     --color-input-font-main: #ced6e0;
@@ -173,8 +177,19 @@ a:hover {
     -moz-box-shadow: 0 5px 5px -5px rgba(47, 53, 66, 0.6);
     box-shadow: 0 5px 5px -5px rgba(47, 53, 66, 0.6);
 }
-.btn:disabled:hover{
+
+.btn:disabled:hover {
     background: var(--color-button-main);
     opacity: 0.5;
 }
 
+.close-icon {
+    filter: var(--color-icons-filter);
+    width: 1rem;
+    height: 1rem;
+}
+
+.close-icon-container:hover {
+    filter: var(--color-icons-filter5);
+    cursor: pointer;
+}

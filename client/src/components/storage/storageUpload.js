@@ -7,13 +7,16 @@ import {handleInputError, handleInputValid} from "./popUp";
 const StorageUpload = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
+    const allFiles = useSelector(state => state.files.files);
+
 
     const {formState: {errors, isValid}, handleSubmit, reset, getValues, register} = useForm({
         mode: 'all'
     });
     const onSubmit = (formData) => {
         const files = [...formData?.fileInput];
-        files.forEach((file) => dispatch(uploadFile(file, currentDirectory)));
+        files.forEach((file) => dispatch(uploadFile(file, currentDirectory, allFiles)));
+        reset();
     }
     return (
         <div className="storage-upload">

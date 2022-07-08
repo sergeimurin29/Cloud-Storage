@@ -110,7 +110,7 @@ class FileController {
             await file.remove();
             user.usedSpace -= file.size;
             user.save();
-            return response.json(200).json({message: "File was deleted"});
+            return response.status(200).json({message: "File was deleted"});
 
         } catch (error) {
             console.log(error);

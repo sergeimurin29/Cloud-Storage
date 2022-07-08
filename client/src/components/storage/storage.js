@@ -7,11 +7,14 @@ import FileList from "./fileList/fileList";
 import "./storage.css";
 import PopUp from "./popUp";
 import StorageUpload from "./storageUpload";
+import Uploader from "./uploader/Uploader";
 
 const Storage = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
     const directoryStack = useSelector(state => state.files.directoryStack);
+    const allFiles = useSelector(state => state.files.files);
+
 
     const [dragEnter, setDragEnter] = useState(false);
 
@@ -46,7 +49,7 @@ const Storage = () => {
         event.stopPropagation();
         event.preventDefault();
         let files = [...event.dataTransfer.files];
-        files.forEach((file) => dispatch(uploadFile(file, currentDirectory)));
+        files.forEach((file) => dispatch(uploadFile(file, currentDirectory, allFiles)));
         setDragEnter(false);
     }
 
@@ -77,6 +80,7 @@ const Storage = () => {
                 </div>
                 <FileList/>
                 <PopUp/>
+                <Uploader/>
             </div>
         </>
     );

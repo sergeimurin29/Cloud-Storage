@@ -49,9 +49,3 @@
     height: 3rem;
     width: 21rem;
 }
-
-.close-icon {
-    filter: var(--color-icons-filter);
-    width: 1rem;
-    height: 1rem;
-}

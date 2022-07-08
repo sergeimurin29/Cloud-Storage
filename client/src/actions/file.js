@@ -1,6 +1,8 @@
 import axios from "axios";
+import {useSelector} from "react-redux";
 import {clientConfig} from "../config/default";
 import {addFile, deleteFile, setFiles} from "../reducers/fileReducer";
+import {addUploadFile, setUploadFiles, showUploader} from "../reducers/uploadReducer";
 
 export const getFiles = (directoryId) => {
     return async dispatch => {
@@ -36,14 +38,16 @@ export const createFolder = (directoryId, directoryName) => {
 }
 
 
-export const uploadFile = (file, directoryId) => {
+export const uploadFile = (file, directoryId, allFiles) => {
     return async dispatch => {
         const formData = new FormData();
         formData.append("file", file);
         if (directoryId) {
             formData.append("parent", directoryId);
         }
-
+        const uploadFile = {name: file.name, progress: 0, id: Date.now()};
+        dispatch(showUploader());
+        dispatch(addUploadFile(uploadFile));
         try {
             const response = await axios.post(clientConfig.server + clientConfig.post.files.upload,
                 formData,
@@ -51,14 +55,22 @@ export const uploadFile = (file, directoryId) => {
                     headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
                     onUploadProgress: progressEvent => {
                         const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
-                        console.log("total", totalLength);
+
                         if (totalLength) {
-                            let progress = Math.round((progressEvent.loaded * 100) / totalLength)
-                            console.log(progress)
+                            uploadFile.progress = Math.round((progressEvent.loaded * 100) / totalLength);
+
+                            let tempFiles = Array.from(allFiles);
+                            tempFiles = [...tempFiles.map(file => file.id === uploadFile.id
+                                ? {...file, progress: uploadFile.progress}
+                                : {...file}
+                            )];
+
+                            dispatch(setUploadFiles(tempFiles));
                         }
                     }
                 });
             dispatch(addFile(response.data));
+
         } catch (error) {
             alert(error?.response?.data?.message);
         }
