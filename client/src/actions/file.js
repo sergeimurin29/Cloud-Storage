@@ -1,10 +1,12 @@
 import axios from "axios";
 import {clientConfig} from "../config/default";
+import {hideLoader, showLoader} from "../reducers/appReducer";
 import {addFile, deleteFile, setFiles} from "../reducers/fileReducer";
 import {addUploadFile, changeUploadFile, showUploader} from "../reducers/uploadReducer";
 
 export const getFiles = (directoryId, sort) => {
     return async dispatch => {
+        dispatch(showLoader());
         try {
             const response = await axios.get(clientConfig.server + clientConfig.get.files.files, {
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
@@ -13,6 +15,9 @@ export const getFiles = (directoryId, sort) => {
             dispatch(setFiles(response.data));
         } catch (error) {
             alert(error);
+        } finally {
+            dispatch(hideLoader());
+
         }
     }
 }
@@ -20,7 +25,7 @@ export const getFiles = (directoryId, sort) => {
 export const createFolder = (directoryId, directoryName) => {
     return async dispatch => {
         try {
-            const response = await axios.post(clientConfig.server + clientConfig.post.files.files,
+            const response = await axios.post(clientConfig.server + clientConfig.post.files,
                 {
                     name: directoryName,
                     type: "dir",
@@ -48,7 +53,7 @@ export const uploadFile = (file, directoryId) => {
         dispatch(showUploader());
         dispatch(addUploadFile(uploadFile));
         try {
-            const response = await axios.post(clientConfig.server + clientConfig.post.files.upload,
+            const response = await axios.put(clientConfig.server + clientConfig.put.files,
                 formData,
                 {
                     headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
@@ -91,7 +96,7 @@ export const downloadFile = async (file) => {
 export const deleteFileAction = (file) => {
     return async dispatch => {
         try {
-            const response = await axios.delete(clientConfig.server + clientConfig.delete.files.file, {
+            const response = await axios.delete(clientConfig.server + clientConfig.delete.files, {
                 params: {id: file._id},
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
             })
@@ -101,4 +106,23 @@ export const deleteFileAction = (file) => {
         }
     }
 };
+
+
+export const searchFileAction = (searchTerm) => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(clientConfig.server + clientConfig.get.files.search, {
+                params: {search: searchTerm},
+                headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
+            });
+            dispatch(setFiles(response.data));
+        } catch (error) {
+            alert(error?.response?.data?.message);
+        }
+        finally {
+            dispatch(hideLoader());
+        }
+    }
+};
+
 

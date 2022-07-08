@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getFiles, uploadFile} from "../../actions/file";
+import {getFiles, searchFileAction, uploadFile} from "../../actions/file";
 import uploadFileDragIcon from "../../assets/upload-file-drag-icon.svg";
+import {showLoader} from "../../reducers/appReducer";
 import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay, showUpload} from "../../reducers/fileReducer";
+import Loader from "../loader/loader";
 import FileList from "./fileList/fileList";
 import "./storage.css";
 import PopUp from "./popUp";
@@ -13,8 +15,11 @@ const Storage = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
     const directoryStack = useSelector(state => state.files.directoryStack);
-    const [sort, setSort] = useState("name");
+    const loader = useSelector(state => state.app.loader);
 
+    const [sort, setSort] = useState("name");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTimeout, setSearchTimeout] = useState(false);
     const [dragEnter, setDragEnter] = useState(false);
 
     useEffect(() => {
@@ -52,6 +57,21 @@ const Storage = () => {
         setDragEnter(false);
     }
 
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        dispatch(showLoader());
+        if (searchTimeout !== false) {
+            clearTimeout(searchTimeout);
+        }
+        if (event.target.value !== "") {
+            setSearchTimeout(setTimeout((value) => {
+                dispatch(searchFileAction(value));
+            }, 300, event.target.value));
+        } else {
+            dispatch(getFiles(currentDirectory));
+        }
+    }
+
 
     return (
         <>
@@ -71,25 +91,41 @@ const Storage = () => {
             <div className={"storage-page"}
                  onDragEnter={handleDragEnter}
                  onDragLeave={handleDragLeave}
-                 onDragOver={handleDragEnter}>
+                 onDragOver={handleDragEnter}
+            >
 
                 <div className={"storage-btn-container"}>
-                    Sort by:
-                    <select value={sort} onChange={(event) => setSort(event.target.value)}
-                            className={"storage-sort-select"}>
-                        <option value={"name"}>By name</option>
-                        <option value={"type"}>By type</option>
-                        <option value={"date"}>By date</option>
-                    </select>
+                    <input type={"text"}
+                           value={searchTerm}
+                           placeholder={"Search"}
+                           className={"input shadow"}
+                           autoComplete={"off"}
+                           onChange={(event) => handleSearch(event)}
+                    />
+                    <div className={"storage-sort-select"}>
+                        Sort by:
+                        <select value={sort} onChange={(event) => setSort(event.target.value)}>
+                            <option value={"name"}>By name</option>
+                            <option value={"type"}>By type</option>
+                            <option value={"date"}>By date</option>
+                        </select>
+                    </div>
                     <button className={"btn btn-left"} onClick={() => dispatch(showUpload())}>Upload</button>
                     {currentDirectory && <button className={"btn btn-left"} onClick={handleBackClick}>Back</button>}
                     <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
                 </div>
-
-                <FileList/>
-                <PopUp/>
-                <Uploader/>
-                <StorageUpload/>
+                {loader ?
+                    <div className={"files-loader"}>
+                        <Loader/>
+                    </div>
+                    :
+                    <>
+                        <FileList/>
+                        <PopUp/>
+                        <Uploader/>
+                        <StorageUpload/>
+                    </>
+                }
             </div>
         </>
     );

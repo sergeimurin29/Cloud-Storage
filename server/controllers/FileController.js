@@ -140,6 +140,19 @@ class FileController {
         }
     }
 
+    async searchFile(request, response) {
+        try {
+            const searchTerm = request.query.search;
+            let files = await File.find({user: request.user.id});
+            files = files.filter(file => file.name.includes(searchTerm));
+            return response.json(files);
+        } catch (error) {
+            console.log(error);
+            return response.status(400).json({message: "Search error"});
+        }
+
+    }
+
 }
 
 module.exports = new FileController();

@@ -5,10 +5,7 @@ export const clientConfig = {
             "sign-up": "auth/sign-up",
             "sign-in": "auth/sign-in"
         },
-        "files": {
-            "files": "files",
-            "upload": "files/upload"
-        },
+        "files": "files",
     },
     "get": {
         "auth": {
@@ -16,12 +13,14 @@ export const clientConfig = {
         },
         "files": {
             "files": "files",
-            "download": "files/download"
+            "download": "files/download",
+            "search": "files/search"
         }
     },
     "delete": {
-        "files": {
-            "file": "files"
-        }
+        "files": "files"
+    },
+    "put": {
+        "files": "files"
     }
 }

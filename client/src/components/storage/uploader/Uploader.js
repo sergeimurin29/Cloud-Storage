@@ -13,19 +13,21 @@ const Uploader = () => {
     return (
         <>
             {isVisible &&
-                <div className={"uploader shadow scale-up-ver-center"}>
-                    <div className="uploader-header">
-                        <div className="uploader-title">Uploads</div>
-                        <div className={"close-icon-container"} onClick={() => dispatch(hideUploader())}>
-                            <img src={crossIcon}
-                                 className={"close-icon"}
-                                 alt={"Close window"}/>
+                <div className={"uploader-out"}>
+                    <div className={"uploader shadow scale-up-ver-center"}>
+                        <div className="uploader-header">
+                            <div className="uploader-title">Uploads</div>
+                            <div className={"close-icon-container"} onClick={() => dispatch(hideUploader())}>
+                                <img src={crossIcon}
+                                     className={"close-icon"}
+                                     alt={"Close window"}/>
+                            </div>
                         </div>
-                    </div>
-                    <div className={"uploader-container"}>
-                        {files.map(file =>
-                            <UploadFile key={file.id} file={file}/>
-                        )}
+                        <div className={"uploader-container"}>
+                            {files.map(file =>
+                                <UploadFile key={file.id} file={file}/>
+                            )}
+                        </div>
                     </div>
                 </div>
             }
