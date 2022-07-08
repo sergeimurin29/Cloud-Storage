@@ -17,7 +17,7 @@
 
 .pop-up {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - var(--height-navbar));
     background: rgba(0, 0, 0, 0.2);
     right: 0;
     left: 0;

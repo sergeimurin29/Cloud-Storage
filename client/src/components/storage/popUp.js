@@ -38,7 +38,7 @@ const PopUp = () => {
 
     return (
         <div className={"pop-up"} onClick={() => {dispatch(setPopUpDisplay("none"));reset();}} style={{display: popUpDisplay}}>
-            <div className="pop-up-container" onClick={(e) => e.stopPropagation()}>
+            <div className="pop-up-container scale-up-ver-center" onClick={(e) => e.stopPropagation()}>
                 <div className="pop-up-header">
                     <div className="pop-up-title">
                         Create new folder

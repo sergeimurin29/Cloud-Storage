@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getFiles, uploadFile} from "../../actions/file";
 import uploadFileDragIcon from "../../assets/upload-file-drag-icon.svg";
-import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay} from "../../reducers/fileReducer";
+import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay, showUpload} from "../../reducers/fileReducer";
 import FileList from "./fileList/fileList";
 import "./storage.css";
 import PopUp from "./popUp";
@@ -14,13 +14,13 @@ const Storage = () => {
     const currentDirectory = useSelector(state => state.files.currentDirectory);
     const directoryStack = useSelector(state => state.files.directoryStack);
     const allFiles = useSelector(state => state.files.files);
-
+    const [sort, setSort] = useState("name");
 
     const [dragEnter, setDragEnter] = useState(false);
 
     useEffect(() => {
-        dispatch(getFiles(currentDirectory));
-    }, [currentDirectory]);
+        dispatch(getFiles(currentDirectory, sort));
+    }, [currentDirectory, sort]);
 
     const handleCreateFolder = () => {
         dispatch(setPopUpDisplay(true));
@@ -73,14 +73,24 @@ const Storage = () => {
                  onDragEnter={handleDragEnter}
                  onDragLeave={handleDragLeave}
                  onDragOver={handleDragEnter}>
-                <StorageUpload/>
+
                 <div className={"storage-btn-container"}>
+                    Sort by:
+                    <select value={sort} onChange={(event) => setSort(event.target.value)}
+                            className={"storage-sort-select"}>
+                        <option value={"name"}>By name</option>
+                        <option value={"type"}>By type</option>
+                        <option value={"date"}>By date</option>
+                    </select>
+                    <button className={"btn btn-left"} onClick={() => dispatch(showUpload())}>Upload</button>
                     {currentDirectory && <button className={"btn btn-left"} onClick={handleBackClick}>Back</button>}
                     <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
                 </div>
+
                 <FileList/>
                 <PopUp/>
                 <Uploader/>
+                <StorageUpload/>
             </div>
         </>
     );

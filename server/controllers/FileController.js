@@ -3,6 +3,7 @@ const config = require("config");
 const fs = require("fs");
 const User = require("../models/User");
 const File = require("../models/File");
+const {json} = require("express");
 
 class FileController {
     async createDir(request, response) {
@@ -29,8 +30,29 @@ class FileController {
 
     async getFiles(request, response) {
         try {
-            const files = await File.find({user: request.user.id, parent: request.query.parent});
-            return response.json(files);
+            const {sort} = request.query;
+            let files;
+            switch (sort) {
+                case"name":
+                    files = await File.find({user: request.user.id, parent: request.query.parent}).sort({name: 1});
+                    break;
+                case"type":
+                    files = await File.find({user: request.user.id, parent: request.query.parent}).sort({type: 1});
+                    break;
+                case"date":
+                    files = await File.find({user: request.user.id, parent: request.query.parent}).sort({date: 1});
+                    break;
+                default:
+                    files = await File.find({user: request.user.id, parent: request.query.parent});
+                    break;
+            }
+
+            const directories = files.filter(file => file.type === "dir");
+            const other = files.filter(file => file.type !== "dir");
+
+            const finalFiles = directories.concat(other);
+
+            return response.json(finalFiles);
         } catch (error) {
             console.log(error);
             return response.status(500).json({message: "Can not get files"});

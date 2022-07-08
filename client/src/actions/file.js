@@ -4,12 +4,12 @@ import {clientConfig} from "../config/default";
 import {addFile, deleteFile, setFiles} from "../reducers/fileReducer";
 import {addUploadFile, setUploadFiles, showUploader} from "../reducers/uploadReducer";
 
-export const getFiles = (directoryId) => {
+export const getFiles = (directoryId, sort) => {
     return async dispatch => {
         try {
             const response = await axios.get(clientConfig.server + clientConfig.get.files.files, {
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
-                params: directoryId ? {parent: directoryId} : {}
+                params: directoryId ? {parent: directoryId, sort: sort} : {sort: sort}
             });
             dispatch(setFiles(response.data));
         } catch (error) {

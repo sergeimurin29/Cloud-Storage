@@ -13,7 +13,7 @@ const Uploader = () => {
     return (
         <>
             {isVisible &&
-                <div className={"uploader shadow"}>
+                <div className={"uploader shadow scale-up-ver-center"}>
                     <div className="uploader-header">
                         <div className="uploader-title">Uploads</div>
                         <div className={"close-icon-container"} onClick={() => dispatch(hideUploader())}>
