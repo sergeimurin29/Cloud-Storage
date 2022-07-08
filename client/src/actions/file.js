@@ -1,8 +1,7 @@
 import axios from "axios";
-import {useSelector} from "react-redux";
 import {clientConfig} from "../config/default";
 import {addFile, deleteFile, setFiles} from "../reducers/fileReducer";
-import {addUploadFile, setUploadFiles, showUploader} from "../reducers/uploadReducer";
+import {addUploadFile, changeUploadFile, showUploader} from "../reducers/uploadReducer";
 
 export const getFiles = (directoryId, sort) => {
     return async dispatch => {
@@ -38,7 +37,7 @@ export const createFolder = (directoryId, directoryName) => {
 }
 
 
-export const uploadFile = (file, directoryId, allFiles) => {
+export const uploadFile = (file, directoryId) => {
     return async dispatch => {
         const formData = new FormData();
         formData.append("file", file);
@@ -57,15 +56,9 @@ export const uploadFile = (file, directoryId, allFiles) => {
                         const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
 
                         if (totalLength) {
-                            uploadFile.progress = Math.round((progressEvent.loaded * 100) / totalLength);
-
-                            let tempFiles = Array.from(allFiles);
-                            tempFiles = [...tempFiles.map(file => file.id === uploadFile.id
-                                ? {...file, progress: uploadFile.progress}
-                                : {...file}
-                            )];
-
-                            dispatch(setUploadFiles(tempFiles));
+                            let progress = Math.round((progressEvent.loaded * 100) / totalLength);
+                            uploadFile.progress = progress;
+                            dispatch(changeUploadFile(uploadFile));
                         }
                     }
                 });
@@ -107,4 +100,5 @@ export const deleteFileAction = (file) => {
             alert(error?.response?.data?.message);
         }
     }
-}
+};
+

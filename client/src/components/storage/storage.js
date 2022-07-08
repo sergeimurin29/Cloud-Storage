@@ -13,7 +13,6 @@ const Storage = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
     const directoryStack = useSelector(state => state.files.directoryStack);
-    const allFiles = useSelector(state => state.files.files);
     const [sort, setSort] = useState("name");
 
     const [dragEnter, setDragEnter] = useState(false);
@@ -49,7 +48,7 @@ const Storage = () => {
         event.stopPropagation();
         event.preventDefault();
         let files = [...event.dataTransfer.files];
-        files.forEach((file) => dispatch(uploadFile(file, currentDirectory, allFiles)));
+        files.forEach((file) => dispatch(uploadFile(file, currentDirectory)));
         setDragEnter(false);
     }
 

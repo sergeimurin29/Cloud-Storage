@@ -2,7 +2,7 @@ const SHOW_UPLOADER = 'SHOW_UPLOADER';
 const HIDE_UPLOADER = 'HIDE_UPLOADER';
 const ADD_UPLOAD_FILE = 'ADD_UPLOAD_FILE';
 const REMOVE_UPLOAD_FILE = 'REMOVE_UPLOAD_FILE';
-const SET_UPLOAD_FILES = 'SET_UPLOAD_FILES';
+const CHANGE_UPLOAD_FILE = 'CHANGE_UPLOAD_FILE';
 
 
 const defaultState = {
@@ -20,8 +20,17 @@ export const uploadReducer = (state = defaultState, action) => {
             return {...state, files: [...state.files, action.payload]};
         case REMOVE_UPLOAD_FILE:
             return {...state, files: [...state.files.filter(file => file.id !== action.payload)]};
-        case SET_UPLOAD_FILES:
-            return {...state, files: [...action.payload]};
+        case CHANGE_UPLOAD_FILE: {
+            let tempFiles = Array.from(state.files);
+            tempFiles = tempFiles.map(file => file.id === action.payload.id
+                ? {...file, progress: action.payload.progress}
+                : {...file}
+            );
+            return {
+                ...state,
+                files: [...tempFiles]
+            }
+        }
         default:
             return state;
     }
@@ -32,5 +41,5 @@ export const showUploader = () => ({type: SHOW_UPLOADER});
 export const hideUploader = () => ({type: HIDE_UPLOADER});
 export const addUploadFile = (file) => ({type: ADD_UPLOAD_FILE, payload: file});
 export const removeUploadFile = (fileId) => ({type: REMOVE_UPLOAD_FILE, payload: fileId});
-export const setUploadFiles = (payload) => ({type: SET_UPLOAD_FILES, payload: payload});
+export const changeUploadFile = (payload) => ({type: CHANGE_UPLOAD_FILE, payload: payload})
 
