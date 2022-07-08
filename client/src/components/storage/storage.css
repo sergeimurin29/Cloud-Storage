@@ -5,10 +5,13 @@
 .storage-btn-container {
     display: flex;
     justify-content: end;
-    margin-right: 1rem;
+    margin-right: 9rem;
 }
 
 .storage-btn-container button {
+    margin-right: 0;
+}
+.storage-btn-container .btn-left {
     margin-right: 0.5rem;
 }
 

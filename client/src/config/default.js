@@ -18,5 +18,10 @@ export const clientConfig = {
             "files": "files",
             "download": "files/download"
         }
+    },
+    "delete": {
+        "files": {
+            "file": "files"
+        }
     }
 }

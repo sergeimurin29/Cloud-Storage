@@ -60,11 +60,16 @@ class FileController {
             }
             await file.mv(path);
             const type = file.name.split('.').pop();
+            let filePath = file.name;
+            if (parent) {
+                filePath = parent.path + "\\" + file.name;
+            }
+
             const dbFile = new File({
                 name: file.name,
                 type: type,
                 size: file.size,
-                path: parent?.path,
+                path: filePath,
                 parent: parent?._id,
                 user: user._id,
             })
@@ -93,6 +98,26 @@ class FileController {
             response.status(500).json({message: "Download error"})
         }
     }
+
+    async removeFile(request, response) {
+        try {
+            const file = await File.findOne({_id: request.query.id, user: request.user.id})
+            const user = await User.findOne({_id: request.user.id});
+            if (!file) {
+                return response.status(400).json({message: "File not found"});
+            }
+            fileService.removeFile(file);
+            await file.remove();
+            user.usedSpace -= file.size;
+            user.save();
+            return response.json(200).json({message: "File was deleted"});
+
+        } catch (error) {
+            console.log(error);
+            return response.status(400).json({message: "Dir isn't empty"});
+        }
+    }
+
 }
 
 module.exports = new FileController();

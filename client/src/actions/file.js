@@ -1,6 +1,6 @@
 import axios from "axios";
 import {clientConfig} from "../config/default";
-import {addFile, setFiles} from "../reducers/fileReducer";
+import {addFile, deleteFile, setFiles} from "../reducers/fileReducer";
 
 export const getFiles = (directoryId) => {
     return async dispatch => {
@@ -60,17 +60,17 @@ export const uploadFile = (file, directoryId) => {
                 });
             dispatch(addFile(response.data));
         } catch (error) {
-            alert(error);
+            alert(error?.response?.data?.message);
         }
     }
 }
 
 export const downloadFile = async (file) => {
-    const response = await  fetch(`${clientConfig.server+clientConfig.get.files.download}?id=${file._id}`,{
+    const response = await fetch(`${clientConfig.server + clientConfig.get.files.download}?id=${file._id}`, {
         headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
     })
 
-    if(response.status===200){
+    if (response.status === 200) {
         const fileBlob = await response.blob();
         const downloadUrl = window.URL.createObjectURL(fileBlob);
         const link = document.createElement("a");
@@ -79,5 +79,20 @@ export const downloadFile = async (file) => {
         document.body.appendChild(link);
         link.click();
         link.remove();
+    }
+}
+
+
+export const deleteFileAction = (file) => {
+    return async dispatch => {
+        try {
+            const response = await axios.delete(clientConfig.server + clientConfig.delete.files.file, {
+                params: {id: file._id},
+                headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
+            })
+            dispatch(deleteFile(file._id));
+        } catch (error) {
+            alert(error?.response?.data?.message);
+        }
     }
 }

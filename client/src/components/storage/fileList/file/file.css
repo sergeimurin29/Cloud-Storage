@@ -1,42 +1,56 @@
-.file{
+.file {
     margin: 0.5rem 9rem;
     background: var(--color-background-container);
-    height: 5rem;
+    height: 7rem;
 
-    border-radius: 0.2rem;
+    border-radius: 0.3rem;
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);
 }
-.file-img{
+
+.file:hover {
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+    background-color: rgba(255, 165, 2, 0.8);
+    color: var(--color-background-container);
+}
+
+.file:hover img {
+    transition: filter 0.2s ease-out;
+    filter: var(--color-icons-filter3);
+}
+
+.file-img {
     justify-self: center;
     align-self: center;
-    width:3rem;
+    width: 3rem;
     height: 3rem;
 }
-.file-date, .file-size{
+
+.file-date, .file-size {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.file-name{
+.file-name {
     grid-column-start: 2;
     display: flex;
     justify-content: start;
     align-items: center;
 }
 
-.file-date{
+.file-date {
     grid-column-start: 4;
     justify-self: center;
 }
 
-.file-size{
+.file-size {
     grid-column-start: 5;
     justify-self: center;
 }
 
-.file-buttons{
+.file-buttons {
     height: 100%;
     grid-column-start: 6;
     position: absolute;
@@ -45,6 +59,7 @@
     justify-content: right;
     align-items: center;
 }
-.file-buttons .delete-button, .file-buttons .download-button{
+
+.file-buttons .delete-button, .file-buttons .download-button {
     margin-right: 1.5rem;
 }

@@ -70,11 +70,11 @@ const Storage = () => {
                  onDragEnter={handleDragEnter}
                  onDragLeave={handleDragLeave}
                  onDragOver={handleDragEnter}>
+                <StorageUpload/>
                 <div className={"storage-btn-container"}>
-                    {currentDirectory && <button className={"btn"} onClick={handleBackClick}>Back</button>}
+                    {currentDirectory && <button className={"btn btn-left"} onClick={handleBackClick}>Back</button>}
                     <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
                 </div>
-                <StorageUpload/>
                 <FileList/>
                 <PopUp/>
             </div>

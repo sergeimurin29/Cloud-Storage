@@ -33,6 +33,8 @@ img{
     --color-icons: #57606f;
     --color-icons-filter: invert(53%) sepia(23%) saturate(249%) hue-rotate(179deg) brightness(86%) contrast(84%);
     --color-icons-filter2:invert(86%) sepia(27%) saturate(4842%) hue-rotate(351deg) brightness(102%) contrast(107%);
+    --color-icons-filter3:invert(100%) sepia(0%) saturate(7499%) hue-rotate(332deg) brightness(104%) contrast(101%);
+
     --color-input-border: #ced6e0;
     --color-input-font-main: #ced6e0;
 
