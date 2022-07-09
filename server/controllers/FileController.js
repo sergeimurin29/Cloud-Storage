@@ -114,10 +114,10 @@ class FileController {
             if (fs.existsSync(path)) {
                 return response.download(path, file.name)
             }
-            return response.status(400).json({message: "Download error"})
-        } catch (e) {
-            console.log(e)
-            response.status(500).json({message: "Download error"})
+            return response.status(400).json({message: "Download error"});
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json({message: "Download error"});
         }
     }
 

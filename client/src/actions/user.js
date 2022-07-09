@@ -12,7 +12,7 @@ export const SignUpAction = async (email, password) => {
         });
         return response;
     } catch (error) {
-        console.log(error);
+        alert(error?.response?.data?.message);
     }
 }
 
@@ -29,7 +29,7 @@ export const SignInAction = (email, password) => {
             dispatch(setUser(response.data.user));
             localStorage.setItem("token", response.data.token);
         } catch (error) {
-            console.log(error);
+            alert(error?.response?.data?.message);
         }
     }
 }

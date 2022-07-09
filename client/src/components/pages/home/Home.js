@@ -15,7 +15,7 @@ const Home = () => {
                 <div className={"h1-welcome"}>Welcome to</div>
                 <div className={"h1-cloud focus-in-expand"}>Cloud Storage</div>
             </div>
-            <div className="home-navigate-container shadow">
+            <div className="home-navigate-container shadow scale-up-ver-bottom">
                 <div className={"home-navigate-container-header"}>
                     We are glad to see you {user.email ? user.email.split("@")[0] : ""}!
                 </div>
@@ -29,13 +29,13 @@ const Home = () => {
                 <div className={"footer"}>
                     {!isAuth &&
                         <>
-                            <Link to={"sign-in"} className={"btn"}>Sign In</Link>
-                            <Link to={"sign-up"} className={"btn"}>Sign Up</Link>
+                            <Link to={"sign-in"} className={"btn si"}>Sign In</Link>
+                            <Link to={"sign-up"} className={"btn su"}>Sign Up</Link>
                         </>
                     }
                     {isAuth &&
                         <>
-                            <Link to={"storage"} className={"btn"}>To Storage</Link>
+                            <Link to={"storage"} className={"btn si"}>To Storage</Link>
                         </>
                     }
                 </div>

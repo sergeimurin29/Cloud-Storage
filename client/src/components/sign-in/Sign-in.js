@@ -42,7 +42,7 @@ const SignIn = () => {
             <img src={homeImage} alt={"Cloud Storage home page"} id={"background-img"}/>
             <div className="sign-in-container shadow scale-up-ver-center">
                 <div className={"sign-in-container-header"}>
-                    <Link to={"../"} replace={true}>
+                    <Link to={"../"} replace={true} className={"close-icon-link"}>
                         <img src={crossIcon} className={"close-icon"} alt={"Close window"}/>
                     </Link>
                 </div>

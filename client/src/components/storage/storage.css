@@ -105,12 +105,14 @@ select.input {
     right: 1rem;
     top: 1rem;
 }
+
 .pop-up-container form {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.pop-up-btn-container{
+
+.pop-up-btn-container {
     width: 100%;
     display: flex;
     justify-content: right;
@@ -250,10 +252,22 @@ select.input {
     filter: var(--color-icons-filter5);
 }
 
-.storage-upload form .input{
+.storage-upload form .input {
     padding-top: 0.75rem;
     height: 2rem;
     display: flex;
     align-items: center;
     justify-items: center;
+}
+
+.empty-file-list {
+    position: absolute;
+    height: 40vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    top: 20vh;
+    left: auto;
 }

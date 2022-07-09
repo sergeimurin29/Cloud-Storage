@@ -76,7 +76,6 @@ const PopUp = () => {
                     <div className={"pop-up-btn-container"}>
                         <button type="submit" className={"btn shadow"} disabled={!isValid}>Create</button>
                     </div>
-
                 </form>
             </div>
         </div>

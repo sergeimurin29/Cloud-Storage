@@ -11,7 +11,7 @@ const Uploader = () => {
     const dispatch = useDispatch();
 
     return (
-        <>
+        <div>
             {isVisible &&
                 <div className={"uploader-out"}>
                     <div className={"uploader shadow scale-up-ver-center"}>
@@ -31,7 +31,7 @@ const Uploader = () => {
                     </div>
                 </div>
             }
-        </>
+        </div>
     );
 };
 

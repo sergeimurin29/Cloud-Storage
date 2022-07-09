@@ -43,7 +43,7 @@ img {
     --color-font-secondary: #747d8c;
     --color-font-info: #ced6e0;
     --color-font-navbar: #ffffff;
-    --color-icons: #57606f;
+    --color-icons: rgba(87, 96, 111, 0.54);
     --color-icons-filter: invert(53%) sepia(23%) saturate(249%) hue-rotate(179deg) brightness(86%) contrast(84%);
     --color-icons-filter2: invert(86%) sepia(27%) saturate(4842%) hue-rotate(351deg) brightness(102%) contrast(107%);
     --color-icons-filter3: invert(100%) sepia(0%) saturate(7499%) hue-rotate(332deg) brightness(104%) contrast(101%);
@@ -203,6 +203,10 @@ a:hover {
 }
 
 .close-icon-container:hover {
+    filter: var(--color-icons-filter5);
+    cursor: pointer;
+}
+.close-icon-link:hover{
     filter: var(--color-icons-filter5);
     cursor: pointer;
 }

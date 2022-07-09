@@ -2,7 +2,7 @@
     position: absolute;
     height: calc(100vh - var(--height-navbar));
     width: 100vw;
-    background-color: black;
+    background: color(var(--color-icons));
     overflow: hidden;
 }
 
@@ -14,5 +14,46 @@
     left: 30vw;
     width: 40vw;
     height: 50vh;
-
+    color: var(--color-icons-filter);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
+
+.not-found img {
+    position: absolute;
+    filter: var(--color-icons-filter);
+    width: 22rem;
+    height: 22rem;
+    top: 7.5rem;
+    right: auto;
+}
+
+.nf-words {
+    position: absolute;
+    top: 4rem;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nf-words .a {
+    font-size: 2rem;
+}
+
+.nf-words .b {
+    font-weight: bold;
+    font-size: 3rem;
+    color: var(--color-background-navbar);
+}
+
+.not-found a {
+    position: fixed;
+    font-size: 1.5rem;
+    bottom: 0;
+    margin-bottom: 1rem;
+}
+

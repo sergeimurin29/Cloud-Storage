@@ -84,10 +84,10 @@ const Storage = () => {
         <>
             {dragEnter &&
                 <div className={"drag-hover"}
-                     onDragEnter={handleDragEnter}
-                     onDragLeave={handleDragLeave}
-                     onDragOver={handleDragEnter}
-                     onDrop={handleDrop}
+                     onDragEnter={(event) => handleDragEnter(event)}
+                     onDragLeave={(event) => handleDragLeave(event)}
+                     onDragOver={(event) => handleDragEnter(event)}
+                     onDrop={(event) => handleDrop(event)}
                 >
                     <img src={uploadFileDragIcon} alt={"Upload file"}/>
                     <div>Drop your files here to upload
@@ -95,10 +95,11 @@ const Storage = () => {
                     </div>
                 </div>
             }
+
             <div className={"storage-page"}
-                 onDragEnter={handleDragEnter}
-                 onDragLeave={handleDragLeave}
-                 onDragOver={handleDragEnter}
+                 onDragEnter={(event) => handleDragEnter(event)}
+                 onDragLeave={(event) => handleDragLeave(event)}
+                 onDragOver={(event) => handleDragEnter(event)}
             >
 
                 <div className={"storage-btn-container"}>
@@ -114,7 +115,6 @@ const Storage = () => {
 
 
                     <div className={"storage-btn-container-right"}>
-
                         {currentDirectory &&
                             <div className={"btn btn-back"} onClick={handleBackClick}>
                                 <img src={backIcon} alt={"Back"}/>
@@ -124,7 +124,6 @@ const Storage = () => {
                         <div className={"btn btn-upload"} onClick={() => dispatch(showUpload())}>
                             <div>Upload</div>
                             <img src={uploadIcon} alt={"Upload"}/>
-
                         </div>
 
                         <button className={"btn btn-new-folder"} onClick={handleCreateFolder}>
@@ -137,10 +136,12 @@ const Storage = () => {
                                  onClick={() => dispatch(setView("list"))}>
                                 <img src={listView} alt={"List"}/>
                             </div>
-                            <div className={`btn btn-list btn-plate ${view === "plate" ? "active" : ""}`} onClick={() => dispatch(setView("plate"))}>
+                            <div className={`btn btn-list btn-plate ${view === "plate" ? "active" : ""}`}
+                                 onClick={() => dispatch(setView("plate"))}>
                                 <img src={plateView} alt={"Plate"}/>
                             </div>
                         </div>
+
                         <div className={"storage-sort-select"}>
                             <div>Sort:</div>
                             <select value={sort} className={"input"} onChange={(event) => setSort(event.target.value)}>
@@ -151,17 +152,18 @@ const Storage = () => {
                         </div>
                     </div>
                 </div>
-                {loader ?
+                {loader &&
                     <div className={"files-loader"}>
                         <Loader/>
                     </div>
-                    :
-                    <>
+                }
+                {!loader &&
+                    <div>
                         <FileList/>
                         <PopUp/>
                         <Uploader/>
                         <StorageUpload/>
-                    </>
+                    </div>
                 }
             </div>
         </>
