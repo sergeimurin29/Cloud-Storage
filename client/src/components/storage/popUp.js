@@ -34,16 +34,20 @@ const PopUp = () => {
     };
 
 
-
-
     return (
-        <div className={"pop-up"} onClick={() => {dispatch(setPopUpDisplay("none"));reset();}} style={{display: popUpDisplay}}>
-            <div className="pop-up-container scale-up-ver-center" onClick={(e) => e.stopPropagation()}>
+        <div className={"pop-up"} onClick={() => {
+            dispatch(setPopUpDisplay("none"));
+            reset();
+        }} style={{display: popUpDisplay}}>
+            <div className="pop-up-container shadow scale-up-ver-center" onClick={(e) => e.stopPropagation()}>
                 <div className="pop-up-header">
                     <div className="pop-up-title">
                         Create new folder
                     </div>
-                    <div onClick={() => {dispatch(setPopUpDisplay("none"));reset();}}>
+                    <div className={"close-icon-container"} onClick={() => {
+                        dispatch(setPopUpDisplay("none"));
+                        reset();
+                    }}>
                         <img src={crossIcon} className={"close-icon"} alt={"Close window"}/>
                     </div>
                 </div>
@@ -69,7 +73,9 @@ const PopUp = () => {
                         }
                     </div>
 
-                    <button type="submit" className={"btn shadow"} disabled={!isValid}>Create</button>
+                    <div className={"pop-up-btn-container"}>
+                        <button type="submit" className={"btn shadow"} disabled={!isValid}>Create</button>
+                    </div>
 
                 </form>
             </div>

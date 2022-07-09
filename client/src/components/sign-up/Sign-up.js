@@ -132,9 +132,9 @@ const SignUp = () => {
                     </div>
 
                     <button type="submit" className={"btn shadow sign-up-btn"} disabled={!isValid}>Sign Up</button>
-                    {redirect &&
+                    {/*{redirect &&
                         <Redirect to={"../sign-up-success"} replace={true}/>
-                    }
+                    }*/}
                 </form>
             </div>
         </div>

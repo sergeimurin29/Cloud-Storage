@@ -1,0 +1,67 @@
+.home-hello-container {
+    position: absolute;
+    height: calc(100vh - var(--height-navbar) - 20vh);
+    width: 100vw;
+    top: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.h1-welcome {
+    display: inline-block;
+    padding: 0;
+    margin-top: 10vh;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.h1-cloud {
+    display: inline-block;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.2), 1px 1px 1px rgba(0, 0, 0, 0.6);
+    font-size: 9rem;
+    color: var(--color-background-navbar);
+    padding: 0;
+    margin: 0;
+    font-weight: bolder;
+}
+
+.home-navigate-container {
+    background-color: var(--color-background-container);
+    position: absolute;
+    width: 40vw;
+    bottom: 0;
+    right: 30vw;
+    height: 37vh;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+
+.home-navigate-container-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4rem;
+    font-size: 1.5rem;
+}
+
+.words{
+    text-align: center;
+    color:var(--color-font-secondary);
+    font-size: 1rem;
+    padding: 1rem 3rem;
+}
+
+.footer{
+    margin-top:1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.footer .btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

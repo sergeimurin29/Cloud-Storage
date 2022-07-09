@@ -81,10 +81,42 @@ select.input {
 }
 
 .pop-up-container {
-    width: 30%;
-    height: 20vh;
+    width: 30vw;
+    height: 30vh;
     background: var(--color-background-container);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+.pop-up-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.pop-up-header .close-icon-container {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+.pop-up-container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pop-up-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 
 .drag-hover {
     width: 100vw;
@@ -216,4 +248,12 @@ select.input {
 
 .btn-plate.active, .btn-list.active {
     filter: var(--color-icons-filter5);
+}
+
+.storage-upload form .input{
+    padding-top: 0.75rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
 }

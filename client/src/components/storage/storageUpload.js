@@ -32,16 +32,20 @@ const StorageUpload = () => {
 
                             <div className="pop-up-header">
                                 <div className="pop-up-title">
-                                    Create new folder
+                                    Upload something
                                 </div>
-                                <div onClick={() => {dispatch(hideUpload());reset();}}>
-                                    <img src={crossIcon} className={"close-icon"} alt={"Close window"}/>
+                                <div onClick={() => {
+                                    dispatch(hideUpload());
+                                    reset();
+                                }}>
+                                    <div className={"close-icon-container"}>
+                                        <img src={crossIcon} className={"close-icon"} alt={"Close window"}/>
+                                    </div>
                                 </div>
                             </div>
 
                             <form autoComplete={"off"} onSubmit={handleSubmit(onSubmit)}>
-                                <label htmlFor={"fileInput"}>Upload file</label>
-                                <input id={"fileInput"} className={"input shadow"} type={"file"} multiple={true}
+                                <input id={"fileInput"} className={"input shadow input-file"} type={"file"} multiple={true}
                                        {...register("fileInput", {
                                            required: {
                                                value: true,
@@ -56,7 +60,9 @@ const StorageUpload = () => {
                                         <small className="input-error">{errors?.fileInput?.message}</small>
                                     }
                                 </div>
-                                <button type="submit" className={"btn shadow"} disabled={!isValid}>Upload</button>
+                                <div className={"pop-up-btn-container"}>
+                                    <button type="submit" className={"btn shadow"} disabled={!isValid}>Upload</button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -57,7 +57,7 @@ img {
 
 
     --color-background-main: #f1f2f6;
-    --color-background-container: #ffffff;
+    --color-background-container: rgb(255, 255, 255);
     --color-background-navbar: #ffa502;
 
     --color-link-main: #ffa502;

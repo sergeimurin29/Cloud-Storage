@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Sign-in.css";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
@@ -10,6 +10,8 @@ import crossIcon from "../../assets/close-window-icon.svg";
 
 const SignIn = () => {
 
+    const [redirect, setRedirect] = useState(false);
+
     const dispatch = useDispatch();
 
     const {formState: {errors, isValid}, handleSubmit, reset, register} = useForm({
@@ -18,6 +20,7 @@ const SignIn = () => {
 
     const onSubmit = (formData) => {
         dispatch(SignInAction(formData.email, formData.password));
+
     }
 
     const handleInputError = (nodeId) => {

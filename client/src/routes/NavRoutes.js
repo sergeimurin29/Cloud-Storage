@@ -19,7 +19,7 @@ const NavRoutes = () => {
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Home/>}/>
                     <Route path={"*"} element={<NotFound/>}/>
-                    <Route path={"sign-up-success"} element={<SignUpSuccess/>}/>
+                    {/*<Route path={"sign-up-success"} element={<SignUpSuccess/>}/>*/}
                     {!isAuth &&
                         <>
                             <Route path={"sign-in"} element={<SignIn/>}/>
