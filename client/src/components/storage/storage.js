@@ -3,18 +3,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {getFiles, searchFileAction, uploadFile} from "../../actions/file";
 import uploadFileDragIcon from "../../assets/upload-file-drag-icon.svg";
 import {showLoader} from "../../reducers/appReducer";
-import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay, showUpload} from "../../reducers/fileReducer";
+import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay, setView, showUpload} from "../../reducers/fileReducer";
 import Loader from "../loader/loader";
 import FileList from "./fileList/fileList";
 import "./storage.css";
 import PopUp from "./popUp";
 import StorageUpload from "./storageUpload";
 import Uploader from "./uploader/Uploader";
+import listView from "../../assets/list-view.svg";
+import plateView from "../../assets/plate-view.svg";
+import newFolderIcon from "../../assets/new-folder-icon.svg";
+import backIcon from "../../assets/back-icon.svg";
+import uploadIcon from "../../assets/upload-icon.svg";
+
 
 const Storage = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
     const directoryStack = useSelector(state => state.files.directoryStack);
+    const view = useSelector(state => state.files.view);
     const loader = useSelector(state => state.app.loader);
 
     const [sort, setSort] = useState("name");
@@ -95,24 +102,54 @@ const Storage = () => {
             >
 
                 <div className={"storage-btn-container"}>
-                    <input type={"text"}
-                           value={searchTerm}
-                           placeholder={"Search"}
-                           className={"input shadow"}
-                           autoComplete={"off"}
-                           onChange={(event) => handleSearch(event)}
-                    />
-                    <div className={"storage-sort-select"}>
-                        Sort by:
-                        <select value={sort} onChange={(event) => setSort(event.target.value)}>
-                            <option value={"name"}>By name</option>
-                            <option value={"type"}>By type</option>
-                            <option value={"date"}>By date</option>
-                        </select>
+                    <div className={"storage-btn-container-left"}>
+                        <input type={"text"}
+                               value={searchTerm}
+                               placeholder={"Search"}
+                               className={"input shadow"}
+                               autoComplete={"off"}
+                               onChange={(event) => handleSearch(event)}
+                        />
                     </div>
-                    <button className={"btn btn-left"} onClick={() => dispatch(showUpload())}>Upload</button>
-                    {currentDirectory && <button className={"btn btn-left"} onClick={handleBackClick}>Back</button>}
-                    <button className={"btn"} onClick={handleCreateFolder}>Create folder</button>
+
+
+                    <div className={"storage-btn-container-right"}>
+
+                        {currentDirectory &&
+                            <div className={"btn btn-back"} onClick={handleBackClick}>
+                                <img src={backIcon} alt={"Back"}/>
+                            </div>
+                        }
+
+                        <div className={"btn btn-upload"} onClick={() => dispatch(showUpload())}>
+                            <div>Upload</div>
+                            <img src={uploadIcon} alt={"Upload"}/>
+
+                        </div>
+
+                        <button className={"btn btn-new-folder"} onClick={handleCreateFolder}>
+                            <div>New</div>
+                            <img src={newFolderIcon} alt={"New folder"}/>
+                        </button>
+
+                        <div className={"view-buttons"}>
+                            <div className={`btn btn-list btn-left ${view === "list" ? "active" : ""}`}
+                                 onClick={() => dispatch(setView("list"))}>
+                                <img src={listView} alt={"List"}/>
+                            </div>
+                            <div className={`btn btn-list btn-plate ${view === "plate" ? "active" : ""}`} onClick={() => dispatch(setView("plate"))}>
+                                <img src={plateView} alt={"Plate"}/>
+                            </div>
+                        </div>
+                        <div className={"storage-sort-select"}>
+                            <div>Sort:</div>
+                            <select value={sort} className={"input"} onChange={(event) => setSort(event.target.value)}>
+                                <option value={"name"}>by name</option>
+                                <option value={"type"}>by type</option>
+                                <option value={"date"}>by date</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 {loader ?
                     <div className={"files-loader"}>

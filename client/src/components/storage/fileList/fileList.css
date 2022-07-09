@@ -1,9 +1,9 @@
 .file-list {
-    margin: 20px 0;
+    margin: 1rem 9rem 0rem 9rem;
 }
 
 .file-list-header {
-    margin: 0 9rem;
+
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);
 }
@@ -20,4 +20,13 @@
 .file-list-size{
     grid-column-start: 5;
     justify-self: center;
+}
+
+.file-plate{
+    margin: 1rem 8.5rem 0rem 8.5rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    align-items: center;
 }

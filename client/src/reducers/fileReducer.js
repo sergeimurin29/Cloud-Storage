@@ -7,6 +7,7 @@ const SET_DIRECTORY_STACK = "SET_DIRECTORY_STACK";
 const DELETE_FILE = "DELETE_FILE";
 const SHOW_UPLOAD = "SHOW_UPLOAD";
 const HIDE_UPLOAD = "HIDE_UPLOAD";
+const SET_VIEW = "SET_VIEW";
 
 
 const defaultState = {
@@ -15,6 +16,7 @@ const defaultState = {
     popUpDisplay: "none",
     directoryStack: [],
     uploadIsVisible: false,
+    view: "list",
 };
 
 export const fileReducer = (state = defaultState, action) => {
@@ -46,6 +48,9 @@ export const fileReducer = (state = defaultState, action) => {
         case HIDE_UPLOAD: {
             return {...state, uploadIsVisible: false};
         }
+        case SET_VIEW: {
+            return {...state, view: action.payload};
+        }
 
         default: {
             return state;
@@ -61,6 +66,9 @@ export const setPopUpDisplay = (display) => ({type: SET_POP_UP_DISPLAY, payload:
 export const pushToDirectoryStack = (directory) => ({type: PUSH_TO_DIRECTORY_STACK, payload: directory});
 export const setDirectoryStack = (directoryStack) => ({type: SET_DIRECTORY_STACK, payload: directoryStack});
 export const deleteFile = (fileId) => ({type: DELETE_FILE, payload: fileId});
+
+export const setView = (type) => ({type: SET_VIEW, payload: type});
+
 
 export const showUpload = () => ({type: SHOW_UPLOAD});
 export const hideUpload = () => ({type: HIDE_UPLOAD});
