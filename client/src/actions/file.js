@@ -118,11 +118,21 @@ export const searchFileAction = (searchTerm) => {
             dispatch(setFiles(response.data));
         } catch (error) {
             alert(error?.response?.data?.message);
-        }
-        finally {
+        } finally {
             dispatch(hideLoader());
         }
     }
 };
 
+export const getFile = async (fileId) => {
+    try {
+        const response = await axios.get(clientConfig.server + clientConfig.get.files.file, {
+            headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
+            params: {id: fileId}
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error?.response?.data?.message);
+    }
+}
 

@@ -28,6 +28,20 @@ class FileController {
         }
     }
 
+    async getFile(request, response) {
+        try {
+            const fileId = request.query.id;
+            if(!fileId){
+                return response.json(null);
+            }
+            const file = await File.findOne({user:request.user.id, _id: fileId })
+            return response.json(file);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({message: "Can not get directory"});
+        }
+    }
+
     async getFiles(request, response) {
         try {
             const {sort} = request.query;
