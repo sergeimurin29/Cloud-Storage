@@ -8,11 +8,13 @@ const DELETE_FILE = "DELETE_FILE";
 const SHOW_UPLOAD = "SHOW_UPLOAD";
 const HIDE_UPLOAD = "HIDE_UPLOAD";
 const SET_VIEW = "SET_VIEW";
+const SET_CURRENT_DIRECTORY_NAME = "SET_CURRENT_DIRECTORY_NAME";
 
 
 const defaultState = {
     files: [],
     currentDirectory: null,
+    currentDirectoryName: "",
     popUpDisplay: "none",
     directoryStack: [],
     uploadIsVisible: false,
@@ -51,7 +53,9 @@ export const fileReducer = (state = defaultState, action) => {
         case SET_VIEW: {
             return {...state, view: action.payload};
         }
-
+        case SET_CURRENT_DIRECTORY_NAME : {
+            return {...state, currentDirectoryName: action.payload};
+        }
         default: {
             return state;
         }
@@ -61,6 +65,9 @@ export const fileReducer = (state = defaultState, action) => {
 
 export const setFiles = (files) => ({type: SET_FILES, payload: files});
 export const setCurrentDirectory = (directory) => ({type: SET_CURRENT_DIRECTORY, payload: directory});
+export const setCurrentDirectoryName = (directoryName) => ({type: SET_CURRENT_DIRECTORY_NAME, payload: directoryName});
+
+
 export const addFile = (file) => ({type: ADD_FILE, payload: file});
 export const setPopUpDisplay = (display) => ({type: SET_POP_UP_DISPLAY, payload: display});
 export const pushToDirectoryStack = (directory) => ({type: PUSH_TO_DIRECTORY_STACK, payload: directory});

@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getFiles, searchFileAction, uploadFile} from "../../actions/file";
+import {getFile, getFiles, searchFileAction, uploadFile} from "../../actions/file";
 import uploadFileDragIcon from "../../assets/upload-file-drag-icon.svg";
 import {showLoader} from "../../reducers/appReducer";
-import {setCurrentDirectory, setDirectoryStack, setPopUpDisplay, setView, showUpload} from "../../reducers/fileReducer";
+import {
+    setCurrentDirectory,
+    setCurrentDirectoryName,
+    setDirectoryStack,
+    setPopUpDisplay,
+    setView,
+    showUpload
+} from "../../reducers/fileReducer";
 import Loader from "../loader/loader";
 import FileList from "./fileList/fileList";
 import "./storage.css";
@@ -20,6 +27,8 @@ import uploadIcon from "../../assets/upload-icon.svg";
 const Storage = () => {
     const dispatch = useDispatch();
     const currentDirectory = useSelector(state => state.files.currentDirectory);
+    const currentDirectoryName = useSelector(state => state.files.currentDirectoryName);
+
     const directoryStack = useSelector(state => state.files.directoryStack);
     const view = useSelector(state => state.files.view);
     const loader = useSelector(state => state.app.loader);
@@ -42,6 +51,7 @@ const Storage = () => {
         const backDirectoryId = dirStack.pop();
         dispatch(setDirectoryStack(dirStack));
         dispatch(setCurrentDirectory(backDirectoryId));
+        getFile(backDirectoryId).then(file => dispatch(setCurrentDirectoryName(file ? file.name : "")));
     }
 
     const handleDragEnter = (event) => {
@@ -112,8 +122,7 @@ const Storage = () => {
                                onChange={(event) => handleSearch(event)}
                         />
                     </div>
-
-
+                    {currentDirectoryName}
                     <div className={"storage-btn-container-right"}>
                         {currentDirectory &&
                             <div className={"btn btn-back"} onClick={handleBackClick}>

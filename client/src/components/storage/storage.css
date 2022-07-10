@@ -59,6 +59,7 @@ select.input {
     width: 7rem;
     border-radius: 0.4rem;
     padding-left: 0.8rem;
+    background-color: white;
 }
 
 .view-buttons .btn {

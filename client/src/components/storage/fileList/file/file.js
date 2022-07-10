@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteFileAction, downloadFile} from "../../../../actions/file";
 import folderIcon from "../../../../assets/folder-icon.svg";
 import fileIcon from "../../../../assets/file-icon.svg";
-import {pushToDirectoryStack, setCurrentDirectory} from "../../../../reducers/fileReducer";
+import {pushToDirectoryStack, setCurrentDirectory, setCurrentDirectoryName} from "../../../../reducers/fileReducer";
 import {bytesToSize} from "../../../../utils/bytesToSize";
 import {cutString} from "../../../../utils/cutString";
 import deleteIcon from "../../../../assets/delete-icon.svg";
@@ -20,6 +20,7 @@ const File = ({file}) => {
     const handleOpenDirectory = () => {
         dispatch(pushToDirectoryStack(currentDirectory));
         dispatch(setCurrentDirectory(file._id));
+        dispatch(setCurrentDirectoryName(file.name));
     }
 
     const handleDownload = (event) => {

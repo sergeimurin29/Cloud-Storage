@@ -13,6 +13,7 @@ export const clientConfig = {
         },
         "files": {
             "files": "files",
+            "file": "files/file",
             "download": "files/download",
             "search": "files/search"
         }
