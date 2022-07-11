@@ -1,6 +1,6 @@
 import axios from "axios";
 import {clientConfig} from "../config/default";
-import {setUser} from "../reducers/userReducer";
+import {setDiskSpace, setUsedSpace, setUser} from "../reducers/userReducer";
 
 export const SignUpAction = async (email, password) => {
     try {
@@ -37,7 +37,7 @@ export const SignInAction = (email, password) => {
 export const AuthAction = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(clientConfig.server + clientConfig.get.auth.auth,  {
+            const response = await axios.get(clientConfig.server + clientConfig.get.auth.auth, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -45,9 +45,25 @@ export const AuthAction = () => {
             dispatch(setUser(response.data.user));
             localStorage.setItem("token", response.data.token);
         } catch (error) {
-            console.log(error);
             console.log(error.response.data.message);
             localStorage.removeItem("token");
         }
+    }
+}
+
+export const getUserSpace = () => {
+    return async dispatch => {
+       try{
+           const response = await axios.get(clientConfig.server + clientConfig.get.user.space, {
+               headers: {
+                   Authorization: `Bearer ${localStorage.getItem("token")}`
+               }
+           });
+           dispatch(setDiskSpace(response.data.diskSpace));
+           dispatch(setUsedSpace(response.data.usedSpace));
+       }
+       catch (error){
+           console.log(error?.response?.data?.message);
+       }
     }
 }

@@ -8,6 +8,9 @@ export const clientConfig = {
         "files": "files",
     },
     "get": {
+        "user":{
+            "space":"user/space"
+        },
         "auth": {
             "auth": "auth/auth"
         },

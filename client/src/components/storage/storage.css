@@ -1,5 +1,6 @@
 .storage-page {
     margin-top: 20px;
+    min-height: calc(100vh - var(--height-navbar) - 20px);
 }
 
 .storage-btn-container {
