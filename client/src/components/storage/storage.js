@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getFile, getFiles, searchFileAction, uploadFile} from "../../actions/file";
+import {getUserSpace} from "../../actions/user";
 import uploadFileDragIcon from "../../assets/upload-file-drag-icon.svg";
 import {showLoader} from "../../reducers/appReducer";
 import {
@@ -22,6 +23,7 @@ import plateView from "../../assets/plate-view.svg";
 import newFolderIcon from "../../assets/new-folder-icon.svg";
 import backIcon from "../../assets/back-icon.svg";
 import uploadIcon from "../../assets/upload-icon.svg";
+import UserSpaceBar from "./userSpaceBar/userSpaceBar";
 
 
 const Storage = () => {
@@ -40,6 +42,7 @@ const Storage = () => {
 
     useEffect(() => {
         dispatch(getFiles(currentDirectory, sort));
+        dispatch(getUserSpace());
     }, [currentDirectory, sort]);
 
     const handleCreateFolder = () => {
@@ -121,6 +124,27 @@ const Storage = () => {
                                autoComplete={"off"}
                                onChange={(event) => handleSearch(event)}
                         />
+
+                        <div className={"storage-sort-select"}>
+                            <div>Sort:</div>
+                            <select value={sort} className={"input"} onChange={(event) => setSort(event.target.value)}>
+                                <option value={"name"}>by name</option>
+                                <option value={"type"}>by type</option>
+                                <option value={"date"}>by date</option>
+                            </select>
+                        </div>
+
+                        <div className={"view-buttons"}>
+                            <div className={`btn btn-list btn-left ${view === "list" ? "active" : ""}`}
+                                 onClick={() => dispatch(setView("list"))}>
+                                <img src={listView} alt={"List"}/>
+                            </div>
+                            <div className={`btn btn-list btn-plate ${view === "plate" ? "active" : ""}`}
+                                 onClick={() => dispatch(setView("plate"))}>
+                                <img src={plateView} alt={"Plate"}/>
+                            </div>
+                        </div>
+
                     </div>
                     {currentDirectoryName}
                     <div className={"storage-btn-container-right"}>
@@ -140,27 +164,12 @@ const Storage = () => {
                             <img src={newFolderIcon} alt={"New folder"}/>
                         </button>
 
-                        <div className={"view-buttons"}>
-                            <div className={`btn btn-list btn-left ${view === "list" ? "active" : ""}`}
-                                 onClick={() => dispatch(setView("list"))}>
-                                <img src={listView} alt={"List"}/>
-                            </div>
-                            <div className={`btn btn-list btn-plate ${view === "plate" ? "active" : ""}`}
-                                 onClick={() => dispatch(setView("plate"))}>
-                                <img src={plateView} alt={"Plate"}/>
-                            </div>
-                        </div>
 
-                        <div className={"storage-sort-select"}>
-                            <div>Sort:</div>
-                            <select value={sort} className={"input"} onChange={(event) => setSort(event.target.value)}>
-                                <option value={"name"}>by name</option>
-                                <option value={"type"}>by type</option>
-                                <option value={"date"}>by date</option>
-                            </select>
-                        </div>
+
+                        <UserSpaceBar/>
                     </div>
                 </div>
+                <hr></hr>
                 {loader &&
                     <div className={"files-loader"}>
                         <Loader/>

@@ -26,10 +26,10 @@ export const userReducer = (state = defaultState, action) => {
             }
         }
         case SET_DISK_SPACE: {
-            return {...state, currentUser: {...state, diskSpace: action.payload}};
+            return {...state, currentUser: {...state.currentUser, diskSpace: action.payload}};
         }
         case SET_USED_SPACE: {
-            return {...state, currentUser: {...state, usedSpace: action.payload}};
+            return {...state, currentUser: {...state.currentUser, usedSpace: action.payload}};
         }
         default: {
             return state;
@@ -39,7 +39,7 @@ export const userReducer = (state = defaultState, action) => {
 
 export const setUser = (user) => ({type: SET_USER, payload: user});
 export const signoutUser = () => ({type: SIGNOUT_USER});
-export const setDiskSpace = (diskSpace) => ({type: SET_USER, payload: diskSpace});
-export const setUsedSpace = (usedSpace) => ({type: SET_USER, payload: usedSpace});
+export const setDiskSpace = (diskSpace) => ({type: SET_DISK_SPACE, payload: diskSpace});
+export const setUsedSpace = (usedSpace) => ({type: SET_USED_SPACE, payload: usedSpace});
 
 

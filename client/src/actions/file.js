@@ -3,6 +3,7 @@ import {clientConfig} from "../config/default";
 import {hideLoader, showLoader} from "../reducers/appReducer";
 import {addFile, deleteFile, setFiles} from "../reducers/fileReducer";
 import {addUploadFile, changeUploadFile, showUploader} from "../reducers/uploadReducer";
+import {getUserSpace} from "./user";
 
 export const getFiles = (directoryId, sort) => {
     return async dispatch => {
@@ -68,6 +69,7 @@ export const uploadFile = (file, directoryId) => {
                     }
                 });
             dispatch(addFile(response.data));
+            dispatch(getUserSpace());
 
         } catch (error) {
             alert(error?.response?.data?.message);
@@ -101,6 +103,7 @@ export const deleteFileAction = (file) => {
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
             })
             dispatch(deleteFile(file._id));
+            dispatch(getUserSpace());
         } catch (error) {
             alert(error?.response?.data?.message);
         }
