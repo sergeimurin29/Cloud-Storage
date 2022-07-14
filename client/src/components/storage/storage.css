@@ -126,8 +126,8 @@ select.input {
 
 .drag-hover {
     width: 100vw;
-    min-height: calc(100vh - 8vh);
-    position: absolute;
+    max-height: 100vh;
+    position: fixed;
     z-index: 5;
     background-color: var(--color-background-container);
     opacity: 0.8;
