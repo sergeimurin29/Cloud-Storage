@@ -31,10 +31,10 @@ class FileController {
     async getFile(request, response) {
         try {
             const fileId = request.query.id;
-            if(!fileId){
+            if (!fileId) {
                 return response.json(null);
             }
-            const file = await File.findOne({user:request.user.id, _id: fileId })
+            const file = await File.findOne({user: request.user.id, _id: fileId})
             return response.json(file);
         } catch (error) {
             console.log(error);
@@ -105,6 +105,7 @@ class FileController {
                 name: file.name,
                 type: type,
                 size: file.size,
+                access_link: config.get("access-link") + user._id + "\\" + filePath,
                 path: filePath,
                 parent: parent?._id,
                 user: user._id,
