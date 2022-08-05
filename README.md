@@ -1,14 +1,17 @@
 # Cloud Storage Website
 
-This web application is a complete service. This service provides cloud storage of data and private access to them.
+This web application is a complete service.<br>
+This service provides cloud storage of data and private access to them.
 
-![](media/Screenshot 2022-08-05 205459.png)
+
+![](https://i.ibb.co/5sggZr2/Screenshot-2022-08-05-205459.png)
 ***
 # How it works
 
-The principle of operation is simple. You log in and get a small amount of free space in the cloud.
+The principle of operation is simple.<br>
+You log in and get a small amount of free space in the cloud.
 
-![](media/Screenshot 2022-08-05 210210.png)
+![](https://i.ibb.co/LJgD9h9/Screenshot-2022-08-05-210210.png)
 
 ## Here some main functions
 >**Files operations**
@@ -27,11 +30,15 @@ The principle of operation is simple. You log in and get a small amount of free 
 ## Uploading by drag and drop
 This method is used to more conveniently upload files to storage.
 
-![](media/Screenshot 2022-08-05 211947.png)
+![](https://i.ibb.co/XZ8pfgR/Screenshot-2022-08-05-211947.png)
 ## Uploading
-As for the upload process. During the upload process, a pop-up window appears with the upload progress. Thus, the user will have full control over the upload of the necessary files to the storage. And also the user will know if his file has loaded or if a network error has occurred
-it
-![](media/Screenshot 2022-08-05 212324.png)
+As for the upload process.<br>
+
+During the upload process, a pop-up window appears with the upload progress.<br>
+
+Thus, the user will have full control over the upload of the necessary files to the storage. And also the user will know if his file has loaded or if a network error has occurred.
+
+![](https://i.ibb.co/4MZkk6M/Screenshot-2022-08-05-212324.png)
 
 ***
 ## Available Scripts
