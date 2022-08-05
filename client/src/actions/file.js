@@ -68,8 +68,8 @@ export const uploadFile = (file, directoryId) => {
                         }
                     }
                 });
-            dispatch(addFile(response.data));
-            dispatch(getUserSpace());
+            await dispatch(addFile(response.data));
+            await dispatch(getUserSpace());
 
         } catch (error) {
             alert(error?.response?.data?.message);

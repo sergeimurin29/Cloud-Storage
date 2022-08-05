@@ -59,8 +59,8 @@ export const getUserSpace = () => {
                    Authorization: `Bearer ${localStorage.getItem("token")}`
                }
            });
-           dispatch(setDiskSpace(response.data.diskSpace));
-           dispatch(setUsedSpace(response.data.usedSpace));
+           await dispatch(setDiskSpace(response.data.diskSpace));
+           await dispatch(setUsedSpace(response.data.usedSpace));
        }
        catch (error){
            console.log(error?.response?.data?.message);
